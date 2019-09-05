@@ -213,14 +213,31 @@ Among these frameworks, \textit{VinoAC} is the one that has been expanded with a
 Like it has been pointed out before, even in the \textit{CA} case there are many useful applications, some of whom are particularly fitting for this model, despite another simulation paradigm could also be used. The introduction of this report illustrates several examples of fields where the usage of a simulation system could be advantageous. However, again, not each of that examples are befitting for the  \textit{CA} paradigm, so here are the most appropriate ones:
 \begin{itemize}
 \item
-\textit{Cryptography} 
+\textit{Cryptography} : Since, to days, a great percentage of the activities in the world of work makes use of the internet to exchange sensitive and personal informations, the \textit{cryptography} field is gaining more and more relevance in order to come out with mechanisms that preserve the confidentiality of these informations. In this context, it could turn to be useful the usage of \textit{CA} to create a \textit{cryptography} key. It's in fact very important in this field to create a strong key, thanks to which the informations can be encrypted, whom prediction is statistically unworkable. \\
+As said before the evolution of an entire \textit{CA} is often really complex as a whole,  in spite of the elementary rules from which descends. Therefore, one could apply to a random initial configuration of a \textit{CA} a \textit{Transition Function} for a random number of times, in order to obtain an unpredictable state to fully or in part use as a key. The reliability of this method is discussed thus far, but it can be proved that the time complexity required to perform an attack to such a key is exponential.
 \item
-\textit{Artificial Life}
+\textit{Artificial Life} : Is known for some time now, in the field of Biology, that many composite organisms, which seem to have a sentient behavior at a certain degree, is actually driven by the basic interactions of elementary insentient components. This components are often static in the space and therefore can only interact with the other components which are near to them. In view of this, many biologists come out with the idea of applying the \textit{CA} simulation paradigm to this complex systems, since it is clear how the model is very fitting to this context, in order to simulate the just mentioned interactions and study more efficiently these phenomena. A well known example is the aforementioned \textit{Conway's Game of Life}, which is a simple but very didactic model to understand the potential of such simulations for fields like the \textit{Populations Ecology and Biology}. 
+
+\begin{figure}[ht!]
+\centering
+    \includegraphics[width=0.75\textwidth]{artificial_life_ca}
+    \caption{  Bacterial Hyperstructures simulated with a \textit{Cellular Automaton} \cite{2}}
+\end{figure}
+
+One last example which could sound more relevant and even of tendency for the field of computer science nowadays, is the case of the \textit{Cellular Neural Networks (CNN)}. Even in this case in fact, as known, a \textit{Neural network} is a computational model inspired by the functioning of the human brain,  that's to say how its complex behavior depends on the interactions between the neurons. The applications of a \textit{Neural Network} are well known in literature and won't be debated here, however it's important to underline that a \textit{CNN} model differs from a classic \textit{Neural Network} because in the first case the information exchange is allowed only between neighboring units, like in a \textit{CA}.
 \item
-\textit{Scientific Modeling}
+\textit{Scientific Modeling} : The final, but most relevant, application discussed here is for the field of the \textit{Computational science}. The main aim in this sphere is to come out with computable models, that can solve mathematical or physical problems, or simulate a natural process and therefore be able to predict its effects and avoid the potential damages. Among the several possibilities discussed already, a \textit{CA} is the one more appropriate for those phenomena which, as said before, are regulated by simple local rules. 
+
+\begin{figure}[ht!]
+\centering
+    \includegraphics[width=0.75\textwidth]{LGA}
+    \caption{  Lattice Gas \textit{cellular Automaton (LGA)} \cite{2}}
+\end{figure}
+
+Such paradigm is in fact often applied to model natural processes comparable to the flux of fluids. A famous example is the one of the \textit{Lattice Gas cellular Automaton (LGA)}, well studied in the 1990s, which models, in various versions, exactly fluid flows and has led to several mathematical results, even in a continuous form. Another \textit{CA} model, that will be discussed in the next chapters as a study case for this research work, is the so-called \textit{SciddicaT}. This model simulates, even here, a flow of rubbles rolling down along a ridge which then may active a landslide.
 \end{itemize}
 
-____RIPRENDI DA QUI ____
+This discussion has only mentioned a small number of fields of application for a \textit{CA} and only the most relevant ones, for our purposes, have been chosen. Between these, the field of the \textit{Computational Science} was the one inspiring this thesis and the starting point for the results that came out from the research work, even if these latter can be applied in other spheres.
 
 \newpage
 \chapter{\textit{D}istributed discrete-\textit{E}vent \textit{S}imulation }{\Large{\textit{DES}}}\\
@@ -602,5 +619,7 @@ Once this adjustments are done, the algorithm is ready to be effectively impleme
 \addcontentsline{toc}{chapter}{Bibliography} 
 \nocite{0}
 \nocite{1}
+\nocite{2}
+\nocite{3}
 \printbibliography{}
 \end{document}

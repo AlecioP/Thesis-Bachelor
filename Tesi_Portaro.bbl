@@ -80,5 +80,60 @@
   Distributed and Network-based Processing}
     \field{year}{2019}
   \endentry
+
+  \entry{2}{article}{}
+    \name{author}{3}{}{%
+      {{hash=LSL}{%
+         family={Le\bibnamedelima Sceller},
+         familyi={L\bibinitperiod\bibinitdelim S\bibinitperiod},
+         given={Lo{\"\i}s},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=RC}{%
+         family={Ripoll},
+         familyi={R\bibinitperiod},
+         given={Camille},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=NV}{%
+         family={Norris},
+         familyi={N\bibinitperiod},
+         given={Vic},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LSLRCNV1}
+    \strng{fullhash}{LSLRCNV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Modelling Bacterial Hyperstructures with Cellular Automata}
+    \field{journaltitle}{Springer, Berlin, Heidelberg}
+    \field{year}{2006}
+  \endentry
+
+  \entry{3}{article}{}
+    \name{author}{2}{}{%
+      {{hash=GM}{%
+         family={Gorodnichev},
+         familyi={G\bibinitperiod},
+         given={Maxim},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MY}{%
+         family={Medvedev},
+         familyi={M\bibinitperiod},
+         given={Yuri},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GMMY1}
+    \strng{fullhash}{GMMY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{A Web-Based Platform for Interactive Parameter Study of
+  Large-Scale Lattice Gas Automata}
+    \field{journaltitle}{Springer, Cham}
+    \field{year}{2019}
+  \endentry
 \enddatalist
 \endinput
