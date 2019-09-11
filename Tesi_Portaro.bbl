@@ -135,5 +135,12 @@
     \field{journaltitle}{Springer, Cham}
     \field{year}{2019}
   \endentry
+
+  \entry{4}{misc}{}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://electronics.stackexchange.com/questions/51625/why-is-the-output-of-stateful-elements-often-named-q}}
+    \field{note}{Accessed: 11-09-2019}
+    \field{title}{Why is the output of stateful elements often named Q?}
+  \endentry
 \enddatalist
 \endinput

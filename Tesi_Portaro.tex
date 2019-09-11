@@ -47,6 +47,19 @@
 \usepackage{listings}
 \usepackage{color}
 
+%Bold math symbols 
+
+\usepackage{bm}
+\newcommand\bolden[1]{{\boldmath\bfseries#1}}
+
+%url
+
+\usepackage{url}
+
+%math symbols +
+
+\usepackage{mathabx}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,7 +144,7 @@ As suggested from the title, this thesis' main aim is to examine in depth some a
 \chapter{Cellular Automata}
 %Chp 2.1
 \section{\textit{CA}'s definition}
-Introduced by mathematician John von Neumann in 1940s, a \textit{Cellular Automata(CA)} is a discrete computational paradigm, studied in computer science, mainly used to simulate complex phenomenon whom behavior derives from the basic interactions of spacial units named \textit{Cells}. A \textit{CA}, as said before, is composed of a  data structure which represents the space where the simulated phenomenon takes place. This data structure, often a matrix, is composed of many elementary units named A \textit{Cells}, therefore this structure is called cellular space. The evolution of the entire simulation is strictly related to the evolution of  all its elementary spacial units. A \textit{Cell}'s evolution, for its part, is related to the application of certain rules at every step of the simulation. Even if the rules of a \textit{CA} can be applied to an infinitely extended space, in a real simulation most of the time the number of \textit{Cells} is finite. Every \textit{Cell} interacts with a relatively narrow number of other \textit{Cells} whom state affect its evolution. The set of \textit{Cells} which affect the evolution of every spacial unit depends on the \textit{Neighborhood} relation. Latter is bound both to the simulated model and the existing types known in literature, from which a modeler can choose. \\
+Introduced by mathematician John von Neumann in 1940s, a \textit{Cellular Automata(CA)} is a discrete computational paradigm, studied in computer science, mainly used to simulate complex phenomenon whom behavior derives from the basic local interactions of spacial units named \textit{Cells}. A \textit{CA}, as said before, is composed of a  data structure which represents the space where the simulated phenomenon takes place. This data structure, often a matrix, is composed of many elementary units named A \textit{Cells}, therefore this structure is called cellular space. The evolution of the entire simulation is strictly related to the evolution of  all its elementary spacial units. A \textit{Cell}'s evolution, for its part, is related to the application of certain rules at every step of the simulation. Even if the rules of a \textit{CA} can be applied to an infinitely extended space, in a real simulation most of the time the number of \textit{Cells} is finite. Every \textit{Cell} interacts with a relatively narrow number of other \textit{Cells} whom state affect its evolution. The set of \textit{Cells} which affect the evolution of every spacial unit depends on the \textit{Neighborhood} relation. Latter is bound both to the simulated model and the existing types known in literature, from which a modeler can choose. \\
 
 \begin{figure}[ht!]
 \centering
@@ -612,6 +625,164 @@ As a final analysis, a relevant aspect to examine is the behavior of the discuss
 Once this adjustments are done, the algorithm is ready to be effectively implemented without affecting the consistency of the simulation in any way. The last thing to examine thus is the performance improvement in terms of time, which, it must be remembered, is the main aim that prompted the ideation of the discussed mechanism.
 \newpage
 \chapter{Experimental Results and Performance Evaluation}{\Large{\textit{Test case : SciddicaT}}}\\
+\section{Testing environment}
+The final phase of this work has been the one during which a test suite to evaluate the performance of the algorithm has been run. In order to appreciate the efficacy of the parallelization process and the resulting speed-up growth with the growing of the number of Lps made available for the simulation, it has been necessary to use a powerful hardware configuration which could secure such processing capacity. Similar hardware was made available by the "University of Calabria" institute. Inside one of its buildings in fact, is located a \textit{cluster} named \textbf{JPDM1}, composed of several \textbf{Intel(R) Xeon(R) CPU E5-2670 2.60GHz } (8 Core- 16 threads) CPUs, with available 128GB of RAM memory each. Moreover, the various nodes are connected by a \textbf{Intel(R) Corporation I350 Gigabit Network} which ensure a low latency and a minimal noise. \\
+The simulation's execution has been adapted to the parallel paradigm using many \textit{DMA} architecture configurations, each containing a certain number of nodes that apply the same \textit{transition function} to their own portion of cellular space. The configurations are namely made of 2, 4, 8 and 16 nodes of the same \textit{cluster}, running at the same time. As said before, the considered subdivision of the cellular space is along only one dimension and in portions of the same size. The cellular space, in simulated terms, is composed of a grid of square \textit{cells}, arranged in 610 columns and 496 rows. \\
+With the intention of make the results of each test reliable, the considered timing values and all the related values inferred, like the speed-up quantity, are each the outcome of repeated executions of the same configuration whom outcomes are used to estimate an average value. This average value is then considered as a referential quantity starting from which all the consideration concerning a configuration are made.
+\section{\textit{Sciddica T}}
+With the aim of underlining how the field of the \textit{computational science} has inspired this work, it has been chosen to use, as test case for the conceived algorithm, a \textit{Cellular Automaton} model named \textit{Sciddica T}.\\
+\textit{Sciddica}, acronym of \textit{\textbf{S}imulation through \textbf{C}omputational \textbf{I}nnovative methods for the \textbf{D}etection of \textbf{D}ebris flow path using \textbf{I}nteractive \textbf{C}ellular \textbf{A}utomata}, is a computational model designed to simulate a debris flow running along a hillside and is being used over the years to replicate and study several real cases. Among the several implementations of this model, the one to whom our tests make reference was 
+designed to study the landslide phenomena 
+of Tessina (Italy) occurred in the 1992,
+ thus this particular version of the
+ model is named \textit{Sciddica T}. 
+ This \textit{CA} models as just said a debris flow, therefore the topology of the region where the landslide evolves is defined at the beginning of the simulation through a text file in the \textit{ASC (Action Script Communication) } format, containing the altitude of each \textit{cell} in the simulated space. In addition to the dataset concerning the topology, the simulator must refer to another file, again in the \textit{ASC} format, which contains the initial quantity of debris in each \textit{cell} in the hotbed of the landslide. The cellular space, as said before, is two-dimensional, with square \textit{cells} and obviously not toroidal. Each \textit{cell} evolves following a fixed \textit{transition function} which takes as input the internal state of the \textit{cells} into the \textit{Neighborhood}, supposed to be of the Von Neumann type with radius equal to 1. \\
+ \begin{figure}[ht!]
+\centering
+    \includegraphics[width=0.75\textwidth]{early_state}
+    \caption{Visual representation of the \textit{CA} in the first steps. The source of the landslide in red. The subdivision over 8 nodes ,of the cellular space shown by the white grid.}
+\end{figure}
+ Having said this, it is now necessary to explain the evolution of the \textit{CA} starting from its initial state. The \textit{SciddicaT} model is defined as a tuple of several values:
+ \begin{equation}
+ \label{sciddicaDef}
+ SciddicaT = <R,X,Q,P,\sigma>
+ \end{equation}
+The values appearing in the equation \ref{sciddicaDef} are defined as follows :
+\begin{itemize}
+\item
+\textbf{R} (Region), is the set of \textit{cells} which define the cellular space wherein the phenomenon evolves. Each \textit{cell} in \textit{R} is defined by a couple of integer coordinates \textit{(i,j)} respectively representing the position along the \textit{y-axis} and along the \textit{x-axis}.
+\item
+\textbf{X}, is the \textit{neighborhood} relation of the Von Neumann type, expressible with a vector \textit{(k,h)}. This vector belongs to the set of cardinality equal to 5 :\\
+\begin{center}
+\textit{N}=\Big\{ (0,0), (1,0), (-1,0), (0,1), (0,-1)\Big\}
+\end{center}
+When the vector \textit{(k,h)} is applied to the coordinates \textit{(i,j)} of a particular \textit{cell}, the result is a couple of integers representing the coordinates of the neighbor \textit{cell}. One must note that in the set \textit{N} is also contained a vector with both coordinates equal to zero, thus a \textit{cell} in this model is neighbor even of itself.
+\item
+\textbf{Q} (Quanta \cite{4} ), is the set of possible states that a \textit{cell} could assume. Each state is a tuple of 6 elements: 
+\begin{center}
+$q=(q_z,q_h,q_{\phi0},q_{\phi1},q_{\phi2},q_{\phi3})$
+\end{center}
+Every possible combination of this elements is the result of the Cartesian product of the 6 sub-states\\ 
+that characterize a \textit{cell} :
+\begin{itemize}
+\item
+$Q_h$ defines the quantity of debris contained in the \textit{cell}.
+\item
+$Q_z$ defines the topologic altitude of the \textit{cell}. This value is defined in the aforementioned configuration file and doesn't change during the simulation evolution. 
+\item
+$Q_{0..3}$ each of this values specifies the quantity of debris flowing out of the \textit{cell}, respectively in the direction of the neighboring \textit{cells}(barring itself).
+\end{itemize}
+\begin{center}
+$ Q =Q_z \bigtimes Q_h \bigtimes Q_{0..3}$
+\end{center}
+\item
+\textbf{P} is a set of constant parameters regulating the dynamic of the flows in the model. Namely there are two parameters :
+\begin{itemize}
+\item
+\textit{$P_\epsilon$}  defines the minimum amount of debris under which nothing comes out of the \textit{cell}
+\item
+\textit{$P_r$}  is the parameter regulating the flow relaxation rate, that's to say how the strength of a flow decreases while crosses the \textit{cell} considered
+\end{itemize}
+\item
+\bolden{$\sigma: Q \rightarrow Q $ }  is an application, between the states set and itself, called \textit{Transition function}. The \textit{transition function} as said before makes a \textit{cell} evolve considering the state of the \textit{neighborhood}. In this case, the function is made of two elementary components :
+\begin{itemize}
+\item \bolden{$\sigma_1$ } Considering the parameter $P_\epsilon$, the function determines if the quantity of debris in the \textit{cell} is enough to generate a flow, if successful the function computes the flows along the four directions and in the end, according to the parameter $P_r$, a new value for the flow strength is computed.
+\item \bolden{$\sigma_2 : Q_h \rightarrow Q_h$ }  Determines a new value for the quantity of debris in the \textit{cell} which affect the result of the function $\sigma_1$.
+\end{itemize}
+\end{itemize}
+
+ \begin{figure}[ht!]
+\centering
+    \includegraphics[trim=0mm 10mm 0mm 10mm,width=0.75\textwidth]{middle_state}
+    \caption{\textit{SciddicaT} distributed over 8 nodes, mono-dimensional split, at step 4000}
+\end{figure}
+
+%2 Rows between figures
+The model explained and the input data set provided have been modified, if 
+compared to the original model inspired to the Tessina phenomenon, in order to 
+%%%%%%%%%%%%%
+
+ \begin{figure}[ht!]
+\centering
+	\vspace{13pt}
+    \includegraphics[trim=0mm 10mm 0mm 10mm,width=0.75\textwidth]{late_state}
+    \caption{\textit{SciddicaT} distributed over 8nodes, mono-dimensional split, at step 8000}
+\end{figure}
+
+\newpage
+exploit all the nodes available and equally distribute the work load. Moreover, with the same aim, it has been evaluated that the propagation of the landslide over almost all the cellular space, and the subsequent activation of all the nodes available, requires circa 4000 steps. If then one considers that the transition function $\sigma$ is made of two distinct components, could model the simulation so that, rather than computing two components of the \textit{transition function} in the same step, the simulator doubles the number of steps, which become 8000, and than executes the component $\sigma_1$ of the \textit{transition function} during the even steps and the component $\sigma_2$ during the odd steps.
+\section{Benchmarks}
+The \textit{Lookahead} module of the \textit{vinoAC} framework has been implemented for the purpose of reducing the overhead of a \textit{CA} parallelization. Since the main cause of this overhead is the \textit{borders} exchange between adjacent Lps, during the design phase of the algorithm it has been decided to find a way to reduce exactly this phenomenon. Thanks to the techniques studied in \textit{distributed discrete-event simulations} literature, such reduction of \textit{borders} exchange become possible. In the case of the example model, the benefits of this overhead reduction approach appear particularly useful and appropriate as well. In a model like \textit{SciddicaT} in fact, where the computation is initially concentrated restricted region of the cellular space and are necessary several steps to make it extend to almost all the topology, a strategy like this could be beneficial because a part of the nodes in the simulation have a minor load of work and could be therefore potentially used as support in the execution of more massive tasks, assigned to other nodes.
+\begin{table}[h!]
+\centering
+\label{bordersTable}
+\begin{tabular}{ |p{4.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+&\multicolumn{4}{|c|}{Nodes} \\
+\hline
+&2 & 4 & 8 & 16 \\
+\hline
+Lp A (often busy) & 2451&9984&15694&15920\\
+\hline
+Lp B (moderately busy) & /&2294&2303&5816\\
+\hline
+Lp C (often idle) & 4&4&4&4\\
+
+\hline
+Avoided \% over 16000 & 84-99\%&37-85-99\%&3-85-99\%&3-63-99\%\\
+
+\hline
+\end{tabular}
+\caption{Borders sent}
+\end{table}
+
+As one can say looking at the above table, in every simulation tested, the great majority of the Lps has significantly reduced the number of \textit{borders} sent to its adjacent nodes during the execution, meaning that, using the classic approach, it would have performed in vain a great portion of the 16000 \textit{borders} transmissions, that would be necessary to update the two adjacent Lp, resulting from a mono-dimensional cut, for all the 8000 steps scheduled. There is moreover, in every test run, at least one Lp which doesn't need to send not even one of it's \textit{borders} during the entire length of the simulation. This situation occurs particularly for those Lps which are delegated to make evolve the most marginal portions of the cellular space. In sum, for the Lps in this test case, it has been estimated that they have an inactivity percentage varying from the average value of 40\% to the extreme case of a 99\% inactivity.\\
+This aspect, as planned, has clearly an impact in the reduction of the parallelization overhead and it can be noticed in first place, 
+considering the course of the speed-up curve for the basic approach compared to the approach depicted in this report. 
+It is important to underline, however, how each speed-up value considered 
+in this case is equal to the mathematical ratio between the latency of an approach in its sequential
+version and the latency of the same approach executed in the different parallel configurations.
+It is also worth saying that the latency of a computation is defined as the ratio between the time elapsed 
+to perform a certain work load and the work load itself and moreover this latter value is the reciprocal of the execution speed. 
+
+ \begin{figure}[ht!]
+\label{chart1}
+\centering
+	\vspace{13pt}
+    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{time_elapsed}
+    \caption{Average time elapsed for the various testing configurations}
+\end{figure}
+
+ \begin{figure}[ht!]
+\label{chart2}
+\centering
+	\vspace{13pt}
+    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{speedup_one}
+    \caption{Speedup, in comparison of the their sequential version, for the basic algorithm and the \textit{lookahead} module}
+\end{figure}
+
+From a quick examination of the chart concerning the speedup evaluation, 
+illustrated in the figure above, it is clear how 
+the lookahead approach case maintains its speed-up more constant compared to the basic 
+version of the \textit{CA} execution. Moreover the approach turns out to be more scalable, 
+which is a desirable property in the context of a \textit{DMA}. \\
+
+For the sake of clarity, the scalability is the property of a system that indicates its capability of 
+handling the growth of the work load by simply adding computational nodes to the architecture. 
+This property is therefore obviously related to the overhead issue, so what we have just 
+explained in relation to the chart and the \textit{lookahead} approach, matches exactly the 
+conclusions one could infer studying the chart from the point of view of the scalability, that's 
+to say the more the system is scalable the less overhead came up from the parallelization.   \\
+
+ \begin{figure}[ht!]
+\label{chart3}
+\centering
+	\vspace{13pt}
+    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{latency}
+    \caption{The values of latency for the considered approaches}
+\end{figure}
+
+
 
 \newpage
 \chapter{Possible future extensions and conclusions}
@@ -620,7 +791,7 @@ Once this adjustments are done, the algorithm is ready to be effectively impleme
 The discussion presented in this report originates from the study of the simulation systems and their application to the field of \textit{Computational Science}. In particular, we have focused on a discrete, time-stepped paradigm called \textit{Cellular Automata}. Since in the majority of the simulation systems, the main aim is to reduce the execution time of the model, a \textit{CA} execution is often distributed on parallel architectures. Among the various possible architectures, the one considered in this work, for its general validity, is a \textit{Distributed Machine Architecture (DMA)}, that's to say a collection of different processors each with its own memory space. The execution is split between various \textit{Logical Processes (Lp)}, each parallel executing its portion of simulation. However at some points in the \textit{wallclock time} an information exchange between processes is inevitable in order to make evolve the simulation as a whole.\\
  For this purpose it was chosen to use the \textit{Message Passing Interface (MPI)} technology, that is a language independent \textit{API} with various implementations. In the light of the efficiency intent of this systems, the obvious choice among the programming languages presenting one or more implementation, was \textit{C++} on account of its performance, robustness and its orientation to the \textit{Object Oriented Programming (OOP)}. The \textit{MPI} paradigm has been chosen for its portability but also its non-blocking methods which allow better timings for the executions. The cited exchange of informations causes a time overhead coming from the parallelization. It's in fact necessary, when a \textit{CA}'s execution is distributed over multiple Lps, splitting the cellular space, a regular interchange of the informations concerning the \textit{Cells} on the \textit{Borders} of a portion of space. Thus, to reduce this overhead, it has been tried to apply general techniques of \textit{Distributed discrete-event simulation (DES)} to the \textit{CA} case. 
  
- \section{Simplifications performed and more effective approaches}
+ \section{Simplifications and more effective approaches}
  
  One interesting concept that appears in the literature of this techniques, is the notion of \textit{LookAhead}. This value is defined as a non-negative integer, representing the minimum number of steps, in our case, first of whom an Lp is sure of not receiving any information coming from a neighbor process. Thanks to this data, dynamically computed during the execution, it was possible to come out with a \textit{conservative} mechanism, simpler but less effective to increment the performance, to avoid the \textit{Borders} exchange whenever possible, instead of banally communicate these informations sight unseen, after each step.\\
  It is clear that the selection of a non-conservative approach, instead of a conservative one, would hopefully lead to better timings under favorable conditions. With this purpose, one could therefore design a rollback mechanism for the cellular space, after it has came through the \textit{Transition Function}, maybe by combining the several techniques explained in the literature, and then set up the simulation to adopt an optimistic approach. An Lp then wouldn't provide for the \textit{Borders} exchange with all the neighboring Lps, but optimistically would apply the \textit{Transition Function} to its \textit{Cells}, step after step. However it should then roll back its execution whenever a consistency error is detected in order to communicate the missing informations that corrupted the execution, thus recovering the evolution of the simulation. Anyway, in order to be able of applying such mechanism, it is necessary to ponder the way the roll-back operation is performed, evaluating its impact in terms of spacial and time complexity. Additionally the preference of a non-conservative approach, should be driven by a statistical study of the application background. It's necessary in fact to understand statistically if and when it is possible to avoid the communication of a \textit{Border} and then evaluate the gain which could result even from the best case, versus the timings of the application of a conservative algorithm to the same instance of the problem. \\
@@ -633,5 +804,6 @@ The discussion presented in this report originates from the study of the simulat
 \nocite{1}
 \nocite{2}
 \nocite{3}
+\nocite{4}
 \printbibliography{}
 \end{document}
