@@ -144,7 +144,7 @@ As suggested from the title, this thesis' main aim is to examine in depth some a
 \chapter{Cellular Automata}
 %Chp 2.1
 \section{\textit{CA}'s definition}
-Introduced by mathematician John von Neumann in 1940s, a \textit{Cellular Automata(CA)} is a discrete computational paradigm, studied in computer science, mainly used to simulate complex phenomenon whom behavior derives from the basic local interactions of spacial units named \textit{Cells}. A \textit{CA}, as said before, is composed of a  data structure which represents the space where the simulated phenomenon takes place. This data structure, often a matrix, is composed of many elementary units named A \textit{Cells}, therefore this structure is called cellular space. The evolution of the entire simulation is strictly related to the evolution of  all its elementary spacial units. A \textit{Cell}'s evolution, for its part, is related to the application of certain rules at every step of the simulation. Even if the rules of a \textit{CA} can be applied to an infinitely extended space, in a real simulation most of the time the number of \textit{Cells} is finite. Every \textit{Cell} interacts with a relatively narrow number of other \textit{Cells} whom state affect its evolution. The set of \textit{Cells} which affect the evolution of every spacial unit depends on the \textit{Neighborhood} relation. Latter is bound both to the simulated model and the existing types known in literature, from which a modeler can choose. \\
+Introduced by mathematician John von Neumann in 1940s, a \textit{Cellular Automata(CA)} is a discrete computational paradigm, studied in computer science, mainly used to simulate complex phenomenon whom behavior derives from the basic local interactions of spacial units named \textit{Cells}. A \textit{CA}, as said before, is composed of a  data structure which represents the space where the simulated phenomenon takes place. This data structure, often a matrix, is composed of many elementary units named A \textit{Cells}, therefore this structure is called cellular space. The evolution of the entire simulation is strictly related to the evolution of  all its elementary spacial units. A \textit{Cell}'s evolution, for its part, is related to the application of certain rules at every step of the simulation. Even if the rules of a \textit{CA} can be applied to an infinitely extended space, in a real simulation most of the time the number of \textit{Cells} is finite. Every \textit{Cell} interacts with a relatively narrow number of other \textit{Cells} whom state affect its evolution. The set of \textit{Cells} which affect the evolution of every spacial unit depends on the \textit{Neighborhood} relation. This latter is bound both to the simulated model and the various types, known in literature, which the modeler can choose from. \\
 
 \begin{figure}[ht!]
 \centering
@@ -152,7 +152,7 @@ Introduced by mathematician John von Neumann in 1940s, a \textit{Cellular Automa
     \caption{  From the left to the right, Von Neumann and Moore Neighborhood  with radius equal to one \cite{1} }
 \end{figure}
 
-The \textit{Neighborhood} relation is a geometrical pattern, which relates a set of \textit{Cells}, fixed for every \textit{Cell} and every step of the simulation's evolution. The two most used types in literature, because of their simplicity and however effectiveness, are the following:
+The \textit{Neighborhood} relation is a geometrical pattern, which relates a set of \textit{Cells}, fixed for every \textit{Cell} and every step of the simulation's evolution. The two most widely adopted kinds of pattern existing in literature, appreciated for their simplicity and however effectiveness, are the following:
 \begin{itemize}
 \item
 \textit{Von Neumann Neighborhood} : Fixed a number said radius, each \textit{Cell} in any direction whom distance from the one considered, for instance called C1, is minor or equal to the radius, is said to be in the \textit{neighborhood}, according to this definition.
@@ -161,7 +161,7 @@ The \textit{Neighborhood} relation is a geometrical pattern, which relates a set
 \end{itemize}
 
 
-As said before, the evolution of every \textit{Cell} at a certain point of the simulation is uniquely given from the internal state and the state of the \textit{Neighborhood}. For each particular model there are a certain number of simple rules which have the aforementioned states as input and the next state of the \textit{Cell} as output. From this point of view, each \textit{Cell} evolves as a \textit{FSA (Finite State Automaton)}. Despite this simulation paradigm may seem trivial, it is still very relevant for getting to see the chaotic and complex evolution of the entire model at a macroscopic level.\\
+As reported before, the evolution of every \textit{Cell} at a certain point of the simulation is uniquely given from the internal state and the state of the \textit{Neighborhood}. For each particular model there are a certain number of simple rules which have the aforementioned states as input and the next state of the \textit{Cell} as output. From this point of view, each \textit{Cell} evolves as a \textit{FSA (Finite State Automaton)}. Despite this simulation paradigm may seem trivial, it is still very relevant for getting to see the chaotic and complex evolution of the entire model at a macroscopic level.\\
 Let's think about \textit{Conway's Game of Life}, a famous cellular automaton very studied in the 1970s. This is a two state and bi-dimensional automaton which elementary rules are the following :
 \begin{itemize}
 \item
@@ -173,11 +173,11 @@ A \textit{Cell} in the state \textbf{1} with a number of neighbors in the state 
 \item
 A \textit{Cell} in the state \textbf{0} with a number of neighbors in the state \textbf{1} equal to three goes to the state \textbf{1}
 \end{itemize}
-One of the most interesting aspects of this \textit{CA} is that from some randomized initial configuration of the \textit{Cells} in the simulated region, through its evolution this automaton shows the constant presence of some self-replicating structures, known as \textit{Gliders}, generating from some other structure type known as \textit{Gliders-Gun}. It can be proved that manipulating the initial configuration of the \textit{CA} to generate \textit{Gliders-Gun} and therefore \textit{Gliders}, in certain \textit{Cells} of the space, there will be certain interactions similar to computations. This aspect allows us to say that the aforementioned \textit{CA} can emulate a \textit{Turing machine}.\\
+One of the most interesting aspects of this \textit{CA} is that from some randomized initial configurations of the \textit{Cells} in the simulated region, through its evolution this automaton shows a constant presence of some self-replicating structures, known as \textit{Gliders}, generating from some other structure type known as \textit{Gliders-Gun}. It can be proved that manipulating the initial configuration of the \textit{CA} to generate \textit{Gliders-Gun} and therefore \textit{Gliders}, in certain \textit{Cells} of the space, there will be certain interactions similar to computations. This aspect allows us to say that the aforementioned \textit{CA} can emulate a \textit{Turing machine}.\\
 This example gives us an hint about \textit{CA} simulation paradigm's potentiality as well as it's capability of modeling complex systems behavior, starting from very elementary rules.
 %Chp 2.2
 \section{Parallel execution of \textit{CA}}
-Since a \textit{CA}'s evolution consists of applying the same elementary rules (\textit{Transition Function}) to an huge number of \textit{Cells} in the simulation space, distributing the computation on many process in order to speed up the overall time of the simulation, may seem reasonable and easily workable. The most intuitive way to distribute \textit{CA}s is to split the cellular space in regular and contiguous portions and delegate the application of the \textit{Transition function} on each portion, to a process into the parallel environment. The subject's literature shows several ways of making such a split, depending on the topology of the \textit{CA}, its \textit{cells}'s shape and the dimensions of the cellular space. In fact the split can be made along one or more dimensions. The latter case can make the split more complex.
+Since a \textit{CA}'s evolution consists of applying the same elementary rules (\textit{Transition Function}) to an huge number of \textit{Cells} in the simulation space, distributing the computation on many process in order to speed up the overall time of the simulation, may seem reasonable and straightforward to carry out. The most intuitive way to distribute \textit{CA}s is to split the cellular space in regular and contiguous portions and delegate the application of the \textit{Transition function} on each portion, to a process into the parallel environment. The subject's literature shows several ways of making such a split, depending on the topology of the \textit{CA}, its \textit{cells}'s shape and the dimensions of the cellular space. In fact the split can be made along one or more dimensions. The latter case can make the split more complex.
 
 \begin{figure}[ht!]
 \centering
@@ -782,7 +782,17 @@ to say the more the system is scalable the less overhead came up from the parall
     \caption{The values of latency for the considered approaches}
 \end{figure}
 
+Another important quantity that can emphasize the reduction of overhead is the aforementioned latency. Since it is defined as the quotient of the work load over the time elapsed to perform it, and since the work load for each node is equally assigned and decreasing at the growth of the whole number of nodes in the simulation, while processing the results of the tests we're discussing, it seemed appropriate to evaluate the latency of each test configuration as the mathematical product of the average time elapsed for each node execution, and the number of nodes employed. The chart highlights in first place the difference in growth rate between the two approaches' curves. The curve concerning the basic algorithm grows quickly on the contrary of the curve related to the algorithm using the \textit{lookahead}, which tends to stay constant. This aspect underlines again the great scalability of the designed approach because of its minimal overhead. Secondly and more trivially, the chart shows the better performances, applied to the various configurations of the cluster, of the \textit{lookahead} approach compared to the old mechanism. \\
 
+One last measurement performed in this testing phase is about the evaluation of the speedup related to the \textit{lookahead} module as opposed the basic version. Unlike the preceding speedup definition, in this case this quantity is computed as the mathematical ratio between the latency of the old approach and the new approach, considering the same number of nodes available. The results, illustrated in the chart below, show a curve growing together with the number of nodes used, and makes evident the advantages of using the approach explained in this thesis.
+
+ \begin{figure}[ht!]
+\label{chart3}
+\centering
+	\vspace{13pt}
+    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{speedup_two}
+    \caption{Speed-up of the basic approach over the \textit{Lookahead} module}
+\end{figure}
 
 \newpage
 \chapter{Possible future extensions and conclusions}
