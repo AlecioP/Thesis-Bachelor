@@ -64,6 +64,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+\pagenumbering{roman}
 %TITLE PAGE
 \begin{titlepage}
 \begin{center}
@@ -96,12 +97,20 @@
 \end{center}
 \end{titlepage}
 %TITLE PAGE END
+\newpage 
+\null
+\newpage
+\ \\[10cm]
+\textit{Dedicata ai miei genitori, ai miei fratelli ed ai miei amici}
+\newpage
+\null
 \newpage
 \thispagestyle{empty}
 \tableofcontents
 \thispagestyle{empty}
 
-\newpage
+\newpage\null\newpage
+\pagenumbering{arabic}
 \setcounter{page}{1}
 \chapter{Introduction}
 %As suggested from the title, this thesis' main aim is to examine in depth some aspects of \textit{Cellular Automata} that may result in overhead reduction and performances improvements, when this kind of simulation is executed in a Parallel and Distributed Environment. Most specifically our focus will be on the notion of \textit{Idle Cell}, well known in CA's literature. Latter is strictly related with another concept, coming from Discrete-event Distributed and Parallel Simulation 
@@ -627,7 +636,7 @@ Once this adjustments are done, the algorithm is ready to be effectively impleme
 \chapter{Experimental Results and Performance Evaluation}{\Large{\textit{Test case : SciddicaT}}}\\
 \section{Testing environment}
 The final phase of this work has been the one during which a test suite to evaluate the performance of the algorithm has been run. In order to appreciate the efficacy of the parallelization process and the resulting speed-up growth with the growing of the number of Lps made available for the simulation, it has been necessary to use a powerful hardware configuration which could secure such processing capacity. Similar hardware was made available by the "University of Calabria" institute. Inside one of its buildings in fact, is located a \textit{cluster} named \textbf{JPDM1}, composed of several \textbf{Intel(R) Xeon(R) CPU E5-2670 2.60GHz } (8 Core- 16 threads) CPUs, with available 128GB of RAM memory each. Moreover, the various nodes are connected by a \textbf{Intel(R) Corporation I350 Gigabit Network} which ensure a low latency and a minimal noise. \\
-The simulation's execution has been adapted to the parallel paradigm using many \textit{DMA} architecture configurations, each containing a certain number of nodes that apply the same \textit{transition function} to their own portion of cellular space. The configurations are namely made of 2, 4, 8 and 16 nodes of the same \textit{cluster}, running at the same time. As said before, the considered subdivision of the cellular space is along only one dimension and in portions of the same size. The cellular space, in simulated terms, is composed of a grid of square \textit{cells}, arranged in 610 columns and 496 rows. \\
+The simulation's execution has been adapted to the parallel paradigm using many \textit{DMA} architecture configurations, each containing a certain number of nodes that apply the same \textit{transition function} to their own portion of cellular space. The configurations are namely made of 1, 2, 4, 8 and 16 nodes of the same \textit{cluster}, running at the same time. As said before, the considered subdivision of the cellular space is along only one dimension and in portions of the same size. The cellular space, in simulated terms, is composed of a grid of square \textit{cells}, arranged in 610 columns and 496 rows. \\
 With the intention of make the results of each test reliable, the considered timing values and all the related values inferred, like the speed-up quantity, are each the outcome of repeated executions of the same configuration whom outcomes are used to estimate an average value. This average value is then considered as a referential quantity starting from which all the consideration concerning a configuration are made.
 \section{\textit{Sciddica T}}
 With the aim of underlining how the field of the \textit{computational science} has inspired this work, it has been chosen to use, as test case for the conceived algorithm, a \textit{Cellular Automaton} model named \textit{Sciddica T}.\\
@@ -698,7 +707,7 @@ $ Q =Q_z \bigtimes Q_h \bigtimes Q_{0..3}$
 \end{figure}
 
 %2 Rows between figures
-The model explained and the input data set provided have been modified, if 
+The model explained and the provided input data set 2have been modified, if 
 compared to the original model inspired to the Tessina phenomenon, in order to 
 %%%%%%%%%%%%%
 
@@ -738,20 +747,7 @@ Avoided \% over 16000 & 84-99\%&37-85-99\%&3-85-99\%&3-63-99\%\\
 
 As one can say looking at the above table, in every simulation tested, the great majority of the Lps has significantly reduced the number of \textit{borders} sent to its adjacent nodes during the execution, meaning that, using the classic approach, it would have performed in vain a great portion of the 16000 \textit{borders} transmissions, that would be necessary to update the two adjacent Lp, resulting from a mono-dimensional cut, for all the 8000 steps scheduled. There is moreover, in every test run, at least one Lp which doesn't need to send not even one of it's \textit{borders} during the entire length of the simulation. This situation occurs particularly for those Lps which are delegated to make evolve the most marginal portions of the cellular space. In sum, for the Lps in this test case, it has been estimated that they have an inactivity percentage varying from the average value of 40\% to the extreme case of a 99\% inactivity.\\
 This aspect, as planned, has clearly an impact in the reduction of the parallelization overhead and it can be noticed in first place, 
-considering the course of the speed-up curve for the basic approach compared to the approach depicted in this report. 
-It is important to underline, however, how each speed-up value considered 
-in this case is equal to the mathematical ratio between the latency of an approach in its sequential
-version and the latency of the same approach executed in the different parallel configurations.
-It is also worth saying that the latency of a computation is defined as the ratio between the time elapsed 
-to perform a certain work load and the work load itself and moreover this latter value is the reciprocal of the execution speed. 
-
- \begin{figure}[ht!]
-\label{chart1}
-\centering
-	\vspace{13pt}
-    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{time_elapsed}
-    \caption{Average time elapsed for the various testing configurations}
-\end{figure}
+considering the behavior of the speed-up curve for the basic approach compared to the approach depicted in this report.\\
 
  \begin{figure}[ht!]
 \label{chart2}
@@ -761,13 +757,13 @@ to perform a certain work load and the work load itself and moreover this latter
     \caption{Speedup, in comparison of the their sequential version, for the basic algorithm and the \textit{lookahead} module}
 \end{figure}
 
-From a quick examination of the chart concerning the speedup evaluation, 
+From a quick examination of the chart concerning the obtained speed-up, 
 illustrated in the figure above, it is clear how 
 the lookahead approach case maintains its speed-up more constant compared to the basic 
 version of the \textit{CA} execution. Moreover the approach turns out to be more scalable, 
 which is a desirable property in the context of a \textit{DMA}. \\
 
-For the sake of clarity, the scalability is the property of a system that indicates its capability of 
+The scalability is the property of a system that indicates its capability of 
 handling the growth of the work load by simply adding computational nodes to the architecture. 
 This property is therefore obviously related to the overhead issue, so what we have just 
 explained in relation to the chart and the \textit{lookahead} approach, matches exactly the 
@@ -775,24 +771,14 @@ conclusions one could infer studying the chart from the point of view of the sca
 to say the more the system is scalable the less overhead came up from the parallelization.   \\
 
  \begin{figure}[ht!]
-\label{chart3}
+\label{chart1}
 \centering
 	\vspace{13pt}
-    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{latency}
-    \caption{The values of latency for the considered approaches}
+    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{time_elapsed}
+    \caption{Average time elapsed for the various testing configurations}
 \end{figure}
 
-Another important quantity that can emphasize the reduction of overhead is the aforementioned latency. Since it is defined as the quotient of the work load over the time elapsed to perform it, and since the work load for each node is equally assigned and decreasing at the growth of the whole number of nodes in the simulation, while processing the results of the tests we're discussing, it seemed appropriate to evaluate the latency of each test configuration as the mathematical product of the average time elapsed for each node execution, and the number of nodes employed. The chart highlights in first place the difference in growth rate between the two approaches' curves. The curve concerning the basic algorithm grows quickly on the contrary of the curve related to the algorithm using the \textit{lookahead}, which tends to stay constant. This aspect underlines again the great scalability of the designed approach because of its minimal overhead. Secondly and more trivially, the chart shows the better performances, applied to the various configurations of the cluster, of the \textit{lookahead} approach compared to the old mechanism. \\
-
-One last measurement performed in this testing phase is about the evaluation of the speedup related to the \textit{lookahead} module as opposed the basic version. Unlike the preceding speedup definition, in this case this quantity is computed as the mathematical ratio between the latency of the old approach and the new approach, considering the same number of nodes available. The results, illustrated in the chart below, show a curve growing together with the number of nodes used, and makes evident the advantages of using the approach explained in this thesis.
-
- \begin{figure}[ht!]
-\label{chart3}
-\centering
-	\vspace{13pt}
-    \includegraphics[trim=0mm 10mm 0mm 10mm, width=0.75\textwidth]{speedup_two}
-    \caption{Speed-up of the basic approach over the \textit{Lookahead} module}
-\end{figure}
+The figure 5.4 shows the elapsed time obtained for the considered experiments for both the basic and the \textit{lookahead} approaches. As noted, the \textit{lookahead} technique always produces an improvement starting from two nodes. Please note that one-node experiments are not considered since they are not meaningful for the lookahead version. Therefore, for the evaluation of the speed-up of the \textit{lookahead} approach, the parallel elapsed time of this approach has been compared to the timing relative to the sequential execution of the basic algorithm.
 
 \newpage
 \chapter{Possible future extensions and conclusions}
@@ -807,7 +793,7 @@ The discussion presented in this report originates from the study of the simulat
  It is clear that the selection of a non-conservative approach, instead of a conservative one, would hopefully lead to better timings under favorable conditions. With this purpose, one could therefore design a rollback mechanism for the cellular space, after it has came through the \textit{Transition Function}, maybe by combining the several techniques explained in the literature, and then set up the simulation to adopt an optimistic approach. An Lp then wouldn't provide for the \textit{Borders} exchange with all the neighboring Lps, but optimistically would apply the \textit{Transition Function} to its \textit{Cells}, step after step. However it should then roll back its execution whenever a consistency error is detected in order to communicate the missing informations that corrupted the execution, thus recovering the evolution of the simulation. Anyway, in order to be able of applying such mechanism, it is necessary to ponder the way the roll-back operation is performed, evaluating its impact in terms of spacial and time complexity. Additionally the preference of a non-conservative approach, should be driven by a statistical study of the application background. It's necessary in fact to understand statistically if and when it is possible to avoid the communication of a \textit{Border} and then evaluate the gain which could result even from the best case, versus the timings of the application of a conservative algorithm to the same instance of the problem. \\
  In spite of the usage of the \textit{LookAhead} notion, the latter could acquire other meanings and other purposes within an algorithm. For instance this value could be associated to each \textit{Cell} into the cellular space, as the representation of the number of steps first of whom the state of the \textit{Cell} won't change for sure. Knowing this data about a \textit{Cell}, while applying the \textit{Transition Function}, an Lp can avoid the computation for all those spacial units with a \textit{LookAhead} value, with this last sense,  greater than zero, but rather only decrementing this quantity. Such computation avoidance could lead to sure gain of performance as the increase of the \textit{Idle Cells} and the dimension of the cellular space. On this occasion, the main problem is to evaluate in a reasonable time a \textit{LookAhead} value for each \textit{Cell}, when needed.\\
  One last simplification made during the implementation phase of this work, has been the choice of splitting the cellular space only along one dimension at time. Even if this decision doesn't heavily affect the parallelization of a \textit{CA}, it surely is a restriction which stops the modeler from pushing to the limit the division of the cellular space, which potentially could be distributed even to a number of Lps equal to the number of \textit{Cells} in the simulated space, although this choice would be meaningless. On the other hand a multi-dimensional split of the cellular space could led, also in this case, to a gain in performance, if the subdivision is driven by the consideration of the issues that could result from the overhead of a parallelization gone too far. Furthermore such split could lead to issues related to the complex shape of resulting \textit{Borders}. For instance, as in the mechanism explained in this work, a two-dimensional split of a cellular space with square \textit{Cells}, generates an adjacency relation between Lps which share \textit{Borders} located in the corner of their respective space portions. Such kind of \textit{Border} could entail issues when an Lp needs to compute the distance between an active \textit{Cell} and that \textit{Border}.
- \section{Closing remarks}
+ \section{Conclusive remarks}
  The mechanism illustrated in this report tries to implement a method of parallelization of a \textit{CA}, in order to make its execution faster and therefore the simulations, performed using a framework which implements the explained module, more effective. In this thesis in fact, it has been pointed out many times the importance of a simulation execution as fast as possible. An example is the simulation of a natural process to prevent its effects, or maybe a simulator which has to perform real-time computations in order to produce immediate solutions for a certain problem, like a simulator which solves the assignment of the airplanes to landing strips in an airport. For each one of these situations the speed of the system is very important, not only to guarantee a good experience to the user of the software, but also to assist an human in the act of avoiding or reducing damages to things and persons, potentially resulting from such situations.
 \addcontentsline{toc}{chapter}{Bibliography} 
 \nocite{0}
